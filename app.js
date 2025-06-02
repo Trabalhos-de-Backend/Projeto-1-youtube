@@ -1,5 +1,6 @@
 const Videos = require("./videos");
 const Home = require("./home");
+const Playlists = require("./playlists");
 const readline = require("readline");
 
 const rl = readline.createInterface({
@@ -19,6 +20,7 @@ async function menu() {
     3 - Atualizar vídeo
     4 - Deletar vídeo
     5 - Home
+    6 - Playlists
     0 - Sair
   `);
 
@@ -68,7 +70,11 @@ async function menu() {
 
     case "5":
       await Home.exibirVideos();
-      break;  
+      break;
+
+    case "6":
+      await Playlists.exibirPorCategoria();
+      break;
 
     case "0":
       rl.close();
