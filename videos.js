@@ -1,9 +1,11 @@
 const { connect } = require("./db");
 
 class Videos {
-  constructor(nome, email) {
+  constructor(nome, url, duracao, categoria) {
     this.nome = nome;
-    this.email = email;
+    this.url = url;
+    this.duracao = duracao;
+    this.categoria = categoria;
   }
 
   async inserir() {
@@ -11,12 +13,14 @@ class Videos {
       const { db, client } = await connect();
       const result = await db.collection("videos").insertOne({
         nome: this.nome,
-        email: this.email,
+        url: this.url,
+        duracao: this.duracao,
+        categoria: this.categoria,
       });
-      console.log("Usuário inserido:", result.insertedId);
+      console.log("Vídeo inserido:", result.insertedId);
       client.close();
     } catch (error) {
-      console.log("Erro ao inserir usuário:", error);
+      console.log("Erro ao inserir Vídeo:", error);
     }
   }
 }
