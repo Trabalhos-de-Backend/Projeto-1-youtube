@@ -62,6 +62,20 @@ class Videos {
       console.log("Erro ao deletar vídeo:", error);
     }
   }
+
+  static async buscarTodos() {
+    try {
+      const { db, client } = await connect();
+      const videos = await db.collection("videos").find().toArray();
+      client.close();
+      return videos;
+    } catch (error) {
+      console.log("Erro ao buscar todos os vídeos:", error);
+      return [];
+    }
+  }
+
 }
+
 
 module.exports = Videos;

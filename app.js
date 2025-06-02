@@ -1,4 +1,5 @@
 const Videos = require("./videos");
+const Home = require("./home");
 const readline = require("readline");
 
 const rl = readline.createInterface({
@@ -17,6 +18,7 @@ async function menu() {
     2 - Buscar vídeo por nome
     3 - Atualizar vídeo
     4 - Deletar vídeo
+    5 - Home
     0 - Sair
   `);
 
@@ -63,6 +65,10 @@ async function menu() {
       const idDeletar = await pergunta("ID do vídeo para deletar: ");
       await Videos.deletar(idDeletar);
       break;
+
+    case "5":
+      await Home.exibirVideos();
+      break;  
 
     case "0":
       rl.close();
