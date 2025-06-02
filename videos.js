@@ -1,4 +1,5 @@
 const { connect } = require("./db");
+const { ObjectId } = require("mongodb");
 
 class Videos {
   constructor(nome, url, duracao, categoria) {
@@ -16,11 +17,49 @@ class Videos {
         url: this.url,
         duracao: this.duracao,
         categoria: this.categoria,
+        dataCriacao: new Date(),
       });
       console.log("Vídeo inserido:", result.insertedId);
       client.close();
     } catch (error) {
       console.log("Erro ao inserir Vídeo:", error);
+    }
+  }
+
+  static async buscarPorNome(nome) {
+    try {
+      const { db, client } = await connect();
+      const videos = await db.collection("videos").find({ nome }).toArray();
+      console.log("Vídeos encontrados:", videos);
+      client.close();
+      return videos;
+    } catch (error) {
+      console.log("Erro ao buscar vídeos:", error);
+    }
+  }
+
+  static async atualizar(id, novosDados) {
+    try {
+      const { db, client } = await connect();
+      const result = await db.collection("videos").updateOne(
+        { _id: new ObjectId(id) },
+        { $set: novosDados }
+      );
+      console.log("Vídeo atualizado:", result.modifiedCount > 0);
+      client.close();
+    } catch (error) {
+      console.log("Erro ao atualizar vídeo:", error);
+    }
+  }
+
+  static async deletar(id) {
+    try {
+      const { db, client } = await connect();
+      const result = await db.collection("videos").deleteOne({ _id: new ObjectId(id) });
+      console.log("Vídeo deletado:", result.deletedCount > 0);
+      client.close();
+    } catch (error) {
+      console.log("Erro ao deletar vídeo:", error);
     }
   }
 }
