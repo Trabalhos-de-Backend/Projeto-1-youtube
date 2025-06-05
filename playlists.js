@@ -1,4 +1,5 @@
 const Videos = require("./videos");
+const { logError } = require("./log");
 
 class Playlists {
   static async exibirPorCategoria() {
@@ -24,6 +25,7 @@ class Playlists {
       }
     } catch (error) {
       console.log("Erro ao exibir playlists:", error);
+      logError(error);
     }
   }
 }

@@ -1,4 +1,5 @@
 const Videos = require("./videos");
+const { logError } = require("./log");
 
 class Home {
   static async exibirVideos() {
@@ -12,6 +13,7 @@ class Home {
       });
     } catch (error) {
       console.log("Erro ao exibir vídeos:", error);
+      logError(error);
     }
   }
 }

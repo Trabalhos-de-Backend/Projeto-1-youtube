@@ -6,16 +6,16 @@ if (!fs.existsSync(pastaLogs)) {
   fs.mkdirSync(pastaLogs);
 }
 
-const caminhoArquivoLog = path.join(pastaLogs, "erros.log");
+const caminhoArquivoLog = path.join(pastaLogs, "errors.log");
 
-function registrarErro(erro) {
+function registrarError(error) {
   const dataHora = new Date().toISOString();
-  const mensagemLog = `[${dataHora}] ${erro.stack || erro.message || erro}\n\n`;
-  fs.appendFile(caminhoArquivoLog, mensagemLog, (erroInterno) => {
-    if (erroInterno) {
-      console.error("Erro ao registrar log:", erroInterno);
+  const mensagemLog = `[${dataHora}] ${error.stack || error.message || error}\n\n`;
+  fs.appendFile(caminhoArquivoLog, mensagemLog, (errorInterno) => {
+    if (errorInterno) {
+      console.error("Erro ao registrar log:", errorInterno);
     }
   });
 }
 
-module.exports = { registrarErro };
+module.exports = { registrarError };

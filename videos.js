@@ -1,5 +1,6 @@
 const { connect } = require("./db");
 const { ObjectId } = require("mongodb");
+const { logError } = require("./log");
 
 class Videos {
   constructor(nome, url, duracao, categoria) {
@@ -23,6 +24,7 @@ class Videos {
       client.close();
     } catch (error) {
       console.log("Erro ao inserir Vídeo:", error);
+      logError(error);
     }
   }
 
@@ -35,6 +37,7 @@ class Videos {
       return videos;
     } catch (error) {
       console.log("Erro ao buscar vídeos:", error);
+      logError(error);
     }
   }
 
@@ -49,6 +52,7 @@ class Videos {
       client.close();
     } catch (error) {
       console.log("Erro ao atualizar vídeo:", error);
+      logError(error);
     }
   }
 
@@ -60,6 +64,7 @@ class Videos {
       client.close();
     } catch (error) {
       console.log("Erro ao deletar vídeo:", error);
+      logError(error);
     }
   }
 
@@ -71,6 +76,7 @@ class Videos {
       return videos;
     } catch (error) {
       console.log("Erro ao buscar todos os vídeos:", error);
+      logError(error);
       return [];
     }
   }
