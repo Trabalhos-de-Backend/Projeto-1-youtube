@@ -1,3 +1,6 @@
+//                                                                    //
+// Ignorar, aqui apenas usamos para rodar testes de funcionalidades.  // 
+//                                                                    //
 const Videos = require("./videos");
 const Home = require("./home");
 const Playlists = require("./playlists");
